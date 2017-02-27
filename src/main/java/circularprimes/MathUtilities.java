@@ -18,18 +18,18 @@ public class MathUtilities {
      * 
      * @return the number of all 
      */
-    public static Integer findCircularPrimes(int number) {
+    public Integer findCircularPrimes(int number) {
 
         List<Integer> primes = new ArrayList<>();
         List<Integer> circularPrimes = new ArrayList<>();
 
-        for (int i = 1; i < number; i++) {
+        for (int i = 2; i < number; i++) {
             if (isPrime(i)) {
                 primes.add(i);
             }
         }
-
-        for (Integer prime : primes) {
+        
+        primes.forEach(prime -> {
             int counter = 0;
             for (Integer rotatedPrime : rotateDigits(prime)) {
                 if (isPrime(rotatedPrime)) {
@@ -39,7 +39,7 @@ public class MathUtilities {
             if (counter == rotateDigits(prime).size()) {
                 circularPrimes.add(prime);
             }
-        }
+        });
 
         return circularPrimes.size();
     }
@@ -52,7 +52,7 @@ public class MathUtilities {
      *               
      * @return a list all permutations of a given number
      */
-    public static List<Integer> rotateDigits(Integer number) {
+    public List<Integer> rotateDigits(Integer number) {
 
         List<Integer> rotatedNumbers = new ArrayList<>();
         long originalNumber = number;
@@ -82,16 +82,17 @@ public class MathUtilities {
      * 
      * @return true in case if number is a prime, else - false
      */
-    public static Boolean isPrime(Integer number) {
+    public Boolean isPrime(Integer number) {
         boolean isPrime = true;
         if (number == 0 || number == 1) {
             isPrime = false;
         }
-        for (int i = 2; i < number; i++) {
+        for (int i = 2; i*i <= number; i++) {
             if (number % i == 0) {
                 isPrime = false;
             }
         }
         return isPrime;
     }
+    
 }
