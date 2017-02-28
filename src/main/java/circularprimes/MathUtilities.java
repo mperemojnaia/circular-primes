@@ -3,6 +3,7 @@ package circularprimes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * MathUtilities class
@@ -23,11 +24,11 @@ public class MathUtilities {
         List<Integer> primes = new ArrayList<>();
         List<Integer> circularPrimes = new ArrayList<>();
 
-        for (int i = 2; i < number; i++) {
+        IntStream.range(2, number).forEach(i -> {
             if (isPrime(i)) {
                 primes.add(i);
             }
-        }
+        });
         
         primes.forEach(prime -> {
             int counter = 0;
